@@ -50,3 +50,37 @@ def afundados(frota, tabuleiro):
                 qtd += 1
 
     return qtd
+
+def define_posicoes(linha, coluna, orientacao, tamanho):
+    posicoes = []
+    for i in range(tamanho):
+        if orientacao == "vertical":
+            posicoes.append([linha + i, coluna])
+        else:
+            posicoes.append([linha, coluna + i])
+    return posicoes
+
+
+def posicao_valida(frota, linha, coluna, orientacao, tamanho):
+    novas = define_posicoes(linha, coluna, orientacao, tamanho)
+    valida = True
+
+    for p in novas:
+        l = p[0]
+        c = p[1]
+        if l >= 10 or c >= 10:
+            valida = False
+        if l < 0 or c < 0:
+            valida = False
+
+    if valida == False:
+        return False
+
+    for p in novas:
+        for nome in frota:
+            for navio in frota[nome]:
+                for posicao in navio:
+                    if posicao == p:
+                        return False
+
+    return True
