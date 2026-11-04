@@ -84,3 +84,4 @@ def posicao_valida(frota, linha, coluna, orientacao, tamanho):
                         return False
 
     return True
+
